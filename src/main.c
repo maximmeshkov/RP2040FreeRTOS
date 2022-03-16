@@ -11,27 +11,56 @@
 #include "task.h"
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
-
+const uint OUT_PIN = 0; //external output pin
 
 
 void boardLEDTask(void *param)
 {
+    while (true){
+    
     gpio_put(LED_PIN, 1);
-    vTaskDelay(100);
+    vTaskDelay(333);
     gpio_put(LED_PIN, 0);
-    vTaskDelay(100);
+    vTaskDelay(333);
+    }
 }
+
+void outBoardLEDTask(void *param)
+{
+    while (true){
+    
+    gpio_put(OUT_PIN, 1);
+    vTaskDelay(500);
+    gpio_put(OUT_PIN, 0);
+    vTaskDelay(500);
+    }
+}
+
+
+
+
+
 
 int main() 
 {
  
-     gpio_init(LED_PIN);
-     gpio_set_dir(LED_PIN, GPIO_OUT);
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
 
+    gpio_init(OUT_PIN);
+    gpio_set_dir(OUT_PIN, GPIO_OUT);
+    gpio_put(OUT_PIN, 1);
 
-    TaskHandle_t hTask=NULL;
-    xTaskCreate(boardLEDTask,"",1024,NULL,tskIDLE_PRIORITY,&hTask);
+
+
+
+
+    TaskHandle_t hTask1=NULL;
+    TaskHandle_t hTask2=NULL;
+
+    xTaskCreate(boardLEDTask,"",1024,NULL,1,&hTask1);
+    xTaskCreate(outBoardLEDTask,"",1024,NULL,1,&hTask2);
 
     vTaskStartScheduler();
 
