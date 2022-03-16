@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 # initialize the SDK based on PICO_SDK_PATH
 set(PICO_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/pico-sdk" CACHE STRING "")
-include(pico_sdk_import.cmake)
+include(${PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 project(blink)
 
 # initialize the Pico SDK
@@ -19,6 +19,11 @@ add_executable(blink
 target_link_libraries( blink 
 	pico_stdlib 
 	hardware_gpio 
+	hardware_irq
+	hardware_resets
+
+
+
 	freertos_kernel
 )
 	
