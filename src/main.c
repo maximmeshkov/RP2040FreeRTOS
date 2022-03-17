@@ -19,9 +19,9 @@ void boardLEDTask(void *param)
     while (true){
     
     gpio_put(LED_PIN, 1);
-    vTaskDelay(333);
+    vTaskDelay(1500);
     gpio_put(LED_PIN, 0);
-    vTaskDelay(333);
+    vTaskDelay(1500);
     }
 }
 
@@ -30,16 +30,11 @@ void outBoardLEDTask(void *param)
     while (true){
     
     gpio_put(OUT_PIN, 1);
-    vTaskDelay(500);
+    vTaskDelay(250);
     gpio_put(OUT_PIN, 0);
-    vTaskDelay(500);
+    vTaskDelay(250);
     }
 }
-
-
-
-
-
 
 int main() 
 {
